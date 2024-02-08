@@ -18,7 +18,6 @@ public class Wizard implements Serializable {
     @OneToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE}, mappedBy = "owner")
     private List<Artifact> artifacts = new ArrayList<>();
     public Wizard() {
-
     }
 
     public Integer getId() {
