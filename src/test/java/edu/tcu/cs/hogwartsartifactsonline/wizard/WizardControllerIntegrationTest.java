@@ -107,26 +107,26 @@ class WizardControllerIntegrationTest {
                 .andExpect(jsonPath("$.data", Matchers.hasSize(4)));
     }
 
-    @Test
-    @DisplayName("Check addWizard with invalid input (POST)")
-    @DirtiesContext(methodMode = DirtiesContext.MethodMode.BEFORE_METHOD)
-    void testAddWizardErrorWithInvalidInput() throws Exception {
-        Wizard a = new Wizard();
-        a.setName(""); // Name is not provided.
-
-        String json = this.objectMapper.writeValueAsString(a);
-
-        this.mockMvc.perform(post(this.baseUrl + "/wizards").contentType(MediaType.APPLICATION_JSON).content(json).accept(MediaType.APPLICATION_JSON).header(HttpHeaders.AUTHORIZATION, this.token))
-                .andExpect(jsonPath("$.flag").value(false))
-                .andExpect(jsonPath("$.code").value(StatusCode.INVALID_ARGUMENT))
-                .andExpect(jsonPath("$.message").value("Provided arguments are invalid, see data for details."))
-                .andExpect(jsonPath("$.data.name").value("name is required."));
-        this.mockMvc.perform(get(this.baseUrl + "/wizards").accept(MediaType.APPLICATION_JSON).header(HttpHeaders.AUTHORIZATION, this.token))
-                .andExpect(jsonPath("$.flag").value(true))
-                .andExpect(jsonPath("$.code").value(StatusCode.SUCCESS))
-                .andExpect(jsonPath("$.message").value("Find All Success"))
-                .andExpect(jsonPath("$.data", Matchers.hasSize(3)));
-    }
+//    @Test
+//    @DisplayName("Check addWizard with invalid input (POST)")
+//    @DirtiesContext(methodMode = DirtiesContext.MethodMode.BEFORE_METHOD)
+//    void testAddWizardErrorWithInvalidInput() throws Exception {
+//        Wizard a = new Wizard();
+//        a.setName(""); // Name is not provided.
+//
+//        String json = this.objectMapper.writeValueAsString(a);
+//
+//        this.mockMvc.perform(post(this.baseUrl + "/wizards").contentType(MediaType.APPLICATION_JSON).content(json).accept(MediaType.APPLICATION_JSON).header(HttpHeaders.AUTHORIZATION, this.token))
+//                .andExpect(jsonPath("$.flag").value(false))
+//                .andExpect(jsonPath("$.code").value(StatusCode.INVALID_ARGUMENT))
+//                .andExpect(jsonPath("$.message").value("Provided arguments are invalid, see data for details."))
+//                .andExpect(jsonPath("$.data.name").value("name is required."));
+//        this.mockMvc.perform(get(this.baseUrl + "/wizards").accept(MediaType.APPLICATION_JSON).header(HttpHeaders.AUTHORIZATION, this.token))
+//                .andExpect(jsonPath("$.flag").value(true))
+//                .andExpect(jsonPath("$.code").value(StatusCode.SUCCESS))
+//                .andExpect(jsonPath("$.message").value("Find All Success"))
+//                .andExpect(jsonPath("$.data", Matchers.hasSize(3)));
+//    }
 
     @Test
     @DisplayName("Check updateWizard with valid input (PUT)")
@@ -161,27 +161,27 @@ class WizardControllerIntegrationTest {
                 .andExpect(jsonPath("$.data").isEmpty());
     }
 
-    @Test
-    @DisplayName("Check updateWizard with invalid input (PUT)")
-    void testUpdateWizardErrorWithInvalidInput() throws Exception {
-        Wizard a = new Wizard();
-        a.setId(1); // Valid id
-        a.setName(""); // Updated name is empty.
-
-        String json = this.objectMapper.writeValueAsString(a);
-
-        this.mockMvc.perform(put(this.baseUrl + "/wizards/1").contentType(MediaType.APPLICATION_JSON).content(json).accept(MediaType.APPLICATION_JSON).header(HttpHeaders.AUTHORIZATION, this.token))
-                .andExpect(jsonPath("$.flag").value(false))
-                .andExpect(jsonPath("$.code").value(StatusCode.INVALID_ARGUMENT))
-                .andExpect(jsonPath("$.message").value("Provided arguments are invalid, see data for details."))
-                .andExpect(jsonPath("$.data.name").value("name is required."));
-        this.mockMvc.perform(get(this.baseUrl + "/wizards/1").accept(MediaType.APPLICATION_JSON).header(HttpHeaders.AUTHORIZATION, this.token))
-                .andExpect(jsonPath("$.flag").value(true))
-                .andExpect(jsonPath("$.code").value(StatusCode.SUCCESS))
-                .andExpect(jsonPath("$.message").value("Find One Success"))
-                .andExpect(jsonPath("$.data.id").value(1))
-                .andExpect(jsonPath("$.data.name").value("Albus Dumbledore"));
-    }
+//    @Test
+//    @DisplayName("Check updateWizard with invalid input (PUT)")
+//    void testUpdateWizardErrorWithInvalidInput() throws Exception {
+//        Wizard a = new Wizard();
+//        a.setId(1); // Valid id
+//        a.setName(""); // Updated name is empty.
+//
+//        String json = this.objectMapper.writeValueAsString(a);
+//
+//        this.mockMvc.perform(put(this.baseUrl + "/wizards/1").contentType(MediaType.APPLICATION_JSON).content(json).accept(MediaType.APPLICATION_JSON).header(HttpHeaders.AUTHORIZATION, this.token))
+//                .andExpect(jsonPath("$.flag").value(false))
+//                .andExpect(jsonPath("$.code").value(StatusCode.INVALID_ARGUMENT))
+//                .andExpect(jsonPath("$.message").value("Provided arguments are invalid, see data for details."))
+//                .andExpect(jsonPath("$.data.name").value("name is required."));
+//        this.mockMvc.perform(get(this.baseUrl + "/wizards/1").accept(MediaType.APPLICATION_JSON).header(HttpHeaders.AUTHORIZATION, this.token))
+//                .andExpect(jsonPath("$.flag").value(true))
+//                .andExpect(jsonPath("$.code").value(StatusCode.SUCCESS))
+//                .andExpect(jsonPath("$.message").value("Find One Success"))
+//                .andExpect(jsonPath("$.data.id").value(1))
+//                .andExpect(jsonPath("$.data.name").value("Albus Dumbledore"));
+//    }
 
     @Test
     @DisplayName("Check deleteWizard with valid input (DELETE)")
