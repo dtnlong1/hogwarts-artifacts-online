@@ -16,11 +16,11 @@ jobs:
     steps:
       - name: Check out the repository
         uses: actions/checkout@v4
-      - name: Set up JDK 17
+      - name: Set up JDK 20.0.2 from Oracle
         uses: actions/setup-java@v3
         with:
-          java-version: '17'
-          distribution: 'temurin'
+          java-version: '20.0.2'
+          distribution: 'adopt'
           cache: maven
       - name: Build and test with Maven
         run: mvn --batch-mode package
